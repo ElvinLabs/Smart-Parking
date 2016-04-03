@@ -1,0 +1,27 @@
+{
+  "name": "Server",
+  "description": "This is ther Server for background proccessing in the Smart Parking System",
+  "main": "",
+  "authors": [
+    "AjanthaB DileepaD PrasannaR"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Smart Campus",
+    "Smart City",
+    "Smart Parking"
+  ],
+  "homepage": "https://github.com/ElvinLabs/Smart-Parking-Server",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}

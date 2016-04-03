@@ -1,21 +1,21 @@
 {
-  "name": "Smart Parking System Server",
+  "name": "Server",
   "version": "0.0.1",
-  "description":"This is ther Server for background proccessing in the Smart Parking System",
+  "description": "This is ther Server for background proccessing in the Smart Parking System",
   "private": true,
   "contributors": [
-      {
-       "name": "Ajantha Bandara",
-       "email": "ajantha19991@gmail.com"
-     },
-      {
-       "name": "Dileepa Jayalath",
-       "email": ""
-     },
-      {
-       "name": "Prasanna Rodrigo",
-       "email": ""
-      }
+    {
+      "name": "Ajantha Bandara",
+      "email": "ajantha19991@gmail.com"
+    },
+    {
+      "name": "Dileepa Jayalath",
+      "email": ""
+    },
+    {
+      "name": "Prasanna Rodrigo",
+      "email": ""
+    }
   ],
   "scripts": {
     "start": "node ./bin/www"
@@ -25,9 +25,9 @@
     "url": "https://github.com/ElvinLabs/Smart-Parking-Server.git"
   },
   "keywords": [
-     "Smart Campus",
-     "Smart City",
-     "Smart Parking",
+    "Smart Campus",
+    "Smart City",
+    "Smart Parking"
   ],
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -36,6 +36,7 @@
     "ejs": "^2.4.1",
     "express": "~4.13.1",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "socket.io": "^1.4.5"
   }
 }
