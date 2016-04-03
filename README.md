@@ -1,3 +1,8 @@
+
+##Install Depedencies
+## npm install
+## bower install
+
 ## Run Server
 
 ###On MacOS or Linux, run the app with this command:
