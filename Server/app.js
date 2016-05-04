@@ -65,11 +65,14 @@ app.use(function(err, req, res, next) {
 });
 
 
+var node  = require('./models/node/node');
+
+
 io.sockets.on("connection", function (socket) {
 
   console.log("new user connected");
 
-   socket.emit("new-client",{massage:"Hello user"});
+   socket.emit("new-client",{massage:"Hello user",node:node});
    
 })
 
