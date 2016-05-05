@@ -79,4 +79,4 @@ io.sockets.on("connection", function (socket) {
 
 
 
-module.exports = {app:app,server:server};
+module.exports = {app:app,server:server,io:io};

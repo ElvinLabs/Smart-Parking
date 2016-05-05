@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var socket = io();
 
 	socket.on('connect',function(data){
-		console.log(' connected to ther server');
+		console.log('connected to ther server');
 		// socket.on()
 	});
 
@@ -13,6 +13,10 @@ $(document).ready(function(){
 
 	socket.on('connect_error',function(data){
 	console.log(' server id offline');
+	});
+
+	socket.on('test',function(data){
+	console.log(data);
 	});
 
 })
