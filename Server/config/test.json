@@ -1,0 +1,15 @@
+{
+  "express": {
+    "port": 3000
+  },
+  "logger" : {"filename": "logs/run.log",
+    "level": "silly"
+  },
+  "mongo": {
+    "url": "mongodb://localhost/park"
+  },
+  "google":{
+
+  },
+  "morgan":"common"
+}

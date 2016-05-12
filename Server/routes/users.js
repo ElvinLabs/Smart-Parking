@@ -1,13 +1,15 @@
 var express = require('express');
 var router = express.Router();
-var io = require('../app').io;
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  // res.io.emit("socketToMe", "users");
+var User = require('../models/user/userModel');
 
-  // io.sockets.emit('socketToMe',"Hello");
+router.get('/', function(req, res, next) {
+
 
   res.send('respond with a resource.');
 });
 
 module.exports = router;
+
+
+//var user = new User({fName:"aja",lName:"chana",email:"aghjk",created: new Date()});
+//console.log(user);
