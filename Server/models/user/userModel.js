@@ -12,6 +12,8 @@ var userSchema = new Schema({
     }
 });
 
+//$2a$08$TcZBmQZTHM5l4rOWu3UWfewE2OdN3zUq52WaSVek7NqgMJA1MfW0a
+
 // methods ======================
 // generating a hash
 userSchema.methods.generateHash = function(password) {
