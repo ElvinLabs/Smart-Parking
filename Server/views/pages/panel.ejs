@@ -11,10 +11,10 @@
 <body>
 
 
-	<h1 class="text-info"> <% title %> Smart Parking Panel</h1>
+	<h1 class="text-info"> <%= title.fName %> Smart Parking Panel</h1>
 
 
-	<form class="form-horizontal" action="/node-change" method="POST">
+	<form class="form-horizontal" action="/api/nodes" method="POST">
 	  <!-- <div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 	    <div class="col-sm-10">
@@ -49,7 +49,7 @@
 			  <input type="checkbox" id="inlineCheckbox2" name="node_2"> 2
 			</label>
 			<label class="checkbox-inline">
-			  <input type="checkbox" id="inlineCheckbox3" name="node_3"> 3
+			  <input type="checkbox" id="inlineCheckbox3" name="node_3" checked=""> 3
 			</label>
 	      </div>
 	    </div>

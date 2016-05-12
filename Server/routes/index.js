@@ -1,20 +1,16 @@
 var express = require('express');
 var router = express.Router();
+var preProcess = require('../common/nodePreProcess');
+var nodeProcess = new preProcess();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  //res.render('index', { title: 'Express' });
 });
 
-
-router.get('/panel', function(req, res, next) {
-  res.render('pages/panel', { title: 'Express' });
+router.get('/login', function(req, res, next) {
+    res.render('login');
 });
 
-
-router.post('/node-change', function(req, res, next) {
-	console.log(req.body);
-  res.redirect('/panel')
-});
 
 module.exports = router;
