@@ -15,7 +15,7 @@ for ( i in jQuery( support ) ) {
 }
 support.ownFirst = i === "0";
 
-// Note: most support tests are defined in their respective modules.
+// Note: most support test are defined in their respective modules.
 // false until the test is run
 support.inlineBlockNeedsLayout = false;
 
