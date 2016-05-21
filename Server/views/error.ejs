@@ -8,27 +8,51 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> -->
+    <style>
+        .container-fluid{
+            background: #50a3a2;
+            background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+            background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
+            position: absolute;
+            /* top: 50%; */
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* margin-top: -200px; */
+            overflow: hidden;
+        }
+        .error-code{
+            text-align: center;
+            margin-top: 12%;
+        }
+        .error-number{
+            font-size: 90px;
+            line-height: 90px;
+            margin: 20px 0;
+        }
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <!--
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5/shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      -->
-    <!--<![endif]&ndash;&gt;-->
+        h2 {
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+
+
+    </style>
+
 </head>
 <body>
 
+    <div class="container-fluid">
+        <div class="col-sm-12 error-code">
+            <h1 class="error-number">404</h1>
+            <h2>Sorry but we couldnt find this page</h2>
+            <p>This page you are looking for does not exist</p>
+
+        </div>
 
 
-<h1>Not Found <%= status %> </h1>
-<h5> <%= url %></h5>
-
-
-
-
+    </div>
 
 
 

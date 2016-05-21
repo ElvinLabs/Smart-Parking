@@ -6,9 +6,10 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var flash  = require('connect-flash');
 var session  = require('express-session');
+var path  = require('path');
 
-
-var routes = require('./routes/index');
+require('./config/passport')(passport);
+var routes = require('./routes/index')(passport);
 var users = require('./routes/users');
 var nodes = require('./routes/nodes');
 
@@ -53,6 +54,7 @@ app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   //next(err);
+  res.status(404);
   res.render('error', { status: 404, url: req.url });
 });
 
@@ -90,6 +92,7 @@ io.sockets.on("connection", function (socket) {
 });
 
 
-
+//var bcrypt   = require('bcrypt-nodejs');
+//console.log(bcrypt.hashSync("123456", bcrypt.genSaltSync(8), null));
 
 module.exports = {app:app,server:server,io:io};

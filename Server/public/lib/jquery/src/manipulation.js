@@ -99,7 +99,7 @@ function cloneCopyEvent( src, dest ) {
 	}
 }
 
-// Fix IE bugs, see support tests
+// Fix IE bugs, see support test
 function fixInput( src, dest ) {
 	var nodeName = dest.nodeName.toLowerCase();
 
