@@ -21,6 +21,7 @@
     "start": "node ./bin/www",
     "test": "mocha"
   },
+
   "repository": {
     "type": "git",
     "url": "https://github.com/ElvinLabs/Smart-Parking-Server.git"
