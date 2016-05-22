@@ -12,6 +12,7 @@ require('./config/passport')(passport);
 var routes = require('./routes/index')(passport);
 var users = require('./routes/users');
 var nodes = require('./routes/nodes');
+var views = require('./routes/view');
 
 var app = express();
 
@@ -45,6 +46,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 app.use('/', routes);
 app.use('/users', users);
 app.use('/api', nodes);
+app.use('/home', views);
 
 
 

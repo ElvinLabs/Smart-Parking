@@ -5,23 +5,16 @@ var router = express.Router();
 
 module.exports = function(passport){
 
-    router.get('/',isLoggedIn, function (req, res, next) {
+    router.get('/', function (req, res, next) {
         res.render('index', { title: 'Express' });
     });
 
-    router.post('/abc', function (req, res, next) {
-        console.log(req.body);
-        res.header(200);
-        //res.render('index', { title: 'Express' });
-        res.send({'msg':'Hello'})
-    });
-
     router.get('/login', function (req, res, next) {
-        res.render('login');
+        res.render('login',{massage:req.flash('loginMessage')});
     });
 
     router.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/api/nodes', // redirect to the secure profile section
+        successRedirect: '/', // redirect to the secure profile section
         failureRedirect: '/login', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
@@ -32,6 +25,7 @@ module.exports = function(passport){
 
     router.get('/logout', function (req, res, next) {
         req.logout();
+        req.flash('loginMessage','You logout successfully');
         res.redirect('/login');
     });
 

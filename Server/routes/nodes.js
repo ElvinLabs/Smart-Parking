@@ -21,7 +21,7 @@ router.get('/panel', function(req, res, next) {
     res.send(node);
 });
 
-router.get('/nodes', function(req,res,next){
+router.get('/nodes',isLoggedIn, function(req,res,next){
 
     Node.find(function (err, nodes) {
         if (err){
@@ -35,7 +35,7 @@ router.get('/nodes', function(req,res,next){
 
 });
 
-router.get('/nodes/:nodeId', function(req,res,next){
+router.get('/nodes/:nodeId',isLoggedIn, function(req,res,next){
     var id = req.params.nodeId;
     Node.findOne({_id:id},function (err, node) {
         if (!err){
@@ -47,7 +47,7 @@ router.get('/nodes/:nodeId', function(req,res,next){
     });
 });
 
-router.post('/nodes', function(req, res, next) {
+router.post('/nodes',isLoggedIn, function(req, res, next) {
     var node = new Node({
         lat:req.body.lat,
         lng:req.body.lng,
@@ -67,7 +67,7 @@ router.post('/nodes', function(req, res, next) {
 });
 
 // single update
-router.put('/nodes/:id', function(req, res, next) {
+router.put('/nodes/:id',isLoggedIn, function(req, res, next) {
     console.log(req.params.nodeId);
     var newNode =req.body.node
     if (Object.isMongooseObject(newNode)) {
@@ -96,7 +96,7 @@ router.put('/nodes/:id', function(req, res, next) {
 
 // bulk update
 // single update
-router.put('/nodes/', function(req, res, next) {
+router.put('/nodes/',isLoggedIn, function(req, res, next) {
     var i, len = 0;
     console.log("is Array req.body.nodes");
     console.log(Array.isArray(req.body.nodes));
@@ -124,7 +124,7 @@ router.put('/nodes/', function(req, res, next) {
 
 
 
-router.delete('/nodes/:id', function(req, res, next) {
+router.delete('/nodes/:id',isLoggedIn, function(req, res, next) {
     console.log(req.params.id);
     return Node.findById(req.params.id, function (err, node) {
         return node.remove(function (err) {
@@ -140,6 +140,14 @@ router.delete('/nodes/:id', function(req, res, next) {
     //var nodes= nodeProcess.doProcessFormData(req.body);
     //res.io.sockets.emit("test",nodeProcess.doProcessFormData(req.body));
 });
+
+function isLoggedIn(req, res, next) {
+    if (req.user) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+};
 
 
 module.exports = router;
