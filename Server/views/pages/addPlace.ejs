@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>smart parking server</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
@@ -15,13 +15,13 @@
     <link href="/stylesheets/custom.css" rel="stylesheet">
 </head>
 
-<body class="nav-md" ng-app="prkApp">
-<div class="container body">
+<body class="nav-md" ng-app="prkApp" ng-controller="placeController">
+<div class="container body" ng-init="initializer()">
     <div class="main_container">
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
+                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Smart Park</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -33,7 +33,7 @@
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
-                        <h2>John Doe</h2>
+                        <h2>Admin</h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -45,156 +45,17 @@
                     <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
-                            <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-edit"></i> Manage <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="index.html">Dashboard</a>
-                                    </li>
-                                    <li><a href="index2.html">Dashboard2</a>
-                                    </li>
-                                    <li><a href="index3.html">Dashboard3</a>
-                                    </li>
+                                    <li><a href="places">Places</a>
+                                    <li><a href="nodes">Nodes</a>
                                 </ul>
-                            </li>
-                            <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="form.html">General Form</a>
-                                    </li>
-                                    <li><a href="form_advanced.html">Advanced Components</a>
-                                    </li>
-                                    <li><a href="form_validation.html">Form Validation</a>
-                                    </li>
-                                    <li><a href="form_wizards.html">Form Wizard</a>
-                                    </li>
-                                    <li><a href="form_upload.html">Form Upload</a>
-                                    </li>
-                                    <li><a href="form_buttons.html">Form Buttons</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="general_elements.html">General Elements</a>
-                                    </li>
-                                    <li><a href="media_gallery.html">Media Gallery</a>
-                                    </li>
-                                    <li><a href="typography.html">Typography</a>
-                                    </li>
-                                    <li><a href="icons.html">Icons</a>
-                                    </li>
-                                    <li><a href="glyphicons.html">Glyphicons</a>
-                                    </li>
-                                    <li><a href="widgets.html">Widgets</a>
-                                    </li>
-                                    <li><a href="invoice.html">Invoice</a>
-                                    </li>
-                                    <li><a href="inbox.html">Inbox</a>
-                                    </li>
-                                    <li><a href="calendar.html">Calendar</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="tables.html">Tables</a>
-                                    </li>
-                                    <li><a href="tables_dynamic.html">Table Dynamic</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="chartjs.html">Chart JS</a>
-                                    </li>
-                                    <li><a href="chartjs2.html">Chart JS2</a>
-                                    </li>
-                                    <li><a href="morisjs.html">Moris JS</a>
-                                    </li>
-                                    <li><a href="echarts.html">ECharts </a>
-                                    </li>
-                                    <li><a href="other_charts.html">Other Charts </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="fixed_sidebar.html">Fixed Sidebar</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="menu_section">
-                        <h3>Live On</h3>
-                        <ul class="nav side-menu">
-                            <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="e_commerce.html">E-commerce</a>
-                                    </li>
-                                    <li><a href="projects.html">Projects</a>
-                                    </li>
-                                    <li><a href="project_detail.html">Project Detail</a>
-                                    </li>
-                                    <li><a href="contacts.html">Contacts</a>
-                                    </li>
-                                    <li><a href="profile.html">Profile</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="page_404.html">404 Error</a>
-                                    </li>
-                                    <li><a href="page_500.html">500 Error</a>
-                                    </li>
-                                    <li><a href="plain_page.html">Plain Page</a>
-                                    </li>
-                                    <li><a href="login.html">Login Page</a>
-                                    </li>
-                                    <li><a href="pricing_tables.html">Pricing Tables</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="#level1_1">Level One</a>
-                                    <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li class="sub_menu"><a href="level2.html">Level Two</a>
-                                            </li>
-                                            <li><a href="#level2_1">Level Two</a>
-                                            </li>
-                                            <li><a href="#level2_2">Level Two</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#level1_2">Level One</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a>
                             </li>
                         </ul>
                     </div>
 
                 </div>
                 <!-- /sidebar menu -->
-
-                <!-- /menu footer buttons -->
-                <div class="sidebar-footer hidden-small">
-                    <a data-toggle="tooltip" data-placement="top" title="Settings">
-                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                    </a>
-                    <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                    </a>
-                    <a data-toggle="tooltip" data-placement="top" title="Lock">
-                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                    </a>
-                    <a data-toggle="tooltip" data-placement="top" title="Logout">
-                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                    </a>
-                </div>
-                <!-- /menu footer buttons -->
             </div>
         </div>
 
@@ -210,96 +71,19 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="images/img.jpg" alt="">John Doe
+                                <img src="images/img.jpg" alt="">Admin
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <li><a href="javascript:;">  Profile</a>
-                                </li>
+                                <li><a href="javascript:;">  Profile</a></li>
                                 <li>
                                     <a href="javascript:;">
                                         <span class="badge bg-red pull-right">50%</span>
                                         <span>Settings</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="javascript:;">Help</a>
-                                </li>
-                                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li role="presentation" class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-envelope-o"></i>
-                                <span class="badge bg-green">6</span>
-                            </a>
-                            <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                                <li>
-                                    <a>
-                        <span class="image">
-                                          <img src="images/img.jpg" alt="Profile Image" />
-                                      </span>
-                        <span>
-                                          <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                                      </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                        <span class="image">
-                                          <img src="images/img.jpg" alt="Profile Image" />
-                                      </span>
-                        <span>
-                                          <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                                      </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                        <span class="image">
-                                          <img src="images/img.jpg" alt="Profile Image" />
-                                      </span>
-                        <span>
-                                          <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                                      </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                        <span class="image">
-                                          <img src="images/img.jpg" alt="Profile Image" />
-                                      </span>
-                        <span>
-                                          <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                                      </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="text-center">
-                                        <a>
-                                            <strong>See All Alerts</strong>
-                                            <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </li>
+                                <li><a href="javascript:;">Help</a></li>
+                                <li><a href="../logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                             </ul>
                         </li>
 
@@ -322,7 +106,7 @@
 
                 </div>
                 <div class="clearfix"></div>
-                <div class="row">
+                <div class="row" style="">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
@@ -346,61 +130,107 @@
                             </div>
                             <div class="x_content">
                                 <br />
-                                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                <!-- <form id="demo-form2" action="/api/v1/place" method="post" data-parsley-validate class="form-horizontal form-label-left"> -->
+                                <form id="add-form" data-parsley-validate class="form-horizontal form-label-left">
 
                                     <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Name <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Name <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
-                                        </div>
+                                            <input type="text" ng-model="place.name" required="required" class="form-control col-md-7 col-xs-12">
+                                        </div>{{name}}
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Longitude<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
-                                        </div>
+                                            <input type="number"  ng-model="place.latitude" step="any" required="required" class="form-control col-md-7 col-xs-12">
+                                        </div>{{latitude}}
                                     </div>
                                     <div class="form-group">
-                                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
+                                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Latitude</label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+                                            <input ng-model="place.longitude" class="form-control col-md-7 col-xs-12" type="number" step="any">
+                                        </div>{{longitude}}
+                                    </div>                            
+
+                                    <div class="ln_solid"></div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                            <button type="button" class="btn btn-primary">Cancel</button>
+                                            <button type="button" ng-click="addPlace()" ng-disabled="isAddDisabled" class="btn btn-success">Add</button>
+                                            <button type="button" ng-click="updatePlace()" ng-disabled="isUpdateDisabled" class="btn btn-success">Update</button>
+                                            <button type="button"  ng-disabled="isDeleteDisabled" class="btn btn-success">Delete</button>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <div id="gender" class="btn-group" data-toggle="buttons">
-                                                <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                                    <input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
-                                                </label>
-                                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                                    <input type="radio" name="gender" value="female"> Female
-                                                </label>
+
+                                    <div class="col-sa-12" ng-hide="!isMassageEnable"><p class="text-info" align="center">{{massage}}</p></div>
+
+                                </form>
+
+
+
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="x_panel">
+                                        <div class="x_title">
+                                            <h2>Available Places <small></small></h2>
+                                            <ul class="nav navbar-right panel_toolbox">
+                                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="#">Settings 1</a>
+                                                        </li>
+                                                        <li><a href="#">Settings 2</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                                </li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="card-box table-responsive">
+                                                        <table id="datatable-keytable" class="table table-striped table-bordered">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>longitude</th>
+                                                                <th>latitude</th>
+                                                                <th>created</th>
+                                                                <th>disabled</th>
+                                                            </tr>
+                                                            </thead>
+
+                                                            <tbody>
+                                                            <tr ng-repeat="place in places track by $index" ng-click="selectedRow($index)">
+                                                                <td>{{place.name}}</td>
+                                                                <td>{{place.lat}}</td>
+                                                                <td>{{place.lng}}</td>
+                                                                <td>{{place.created |date}}</td>
+                                                                <td>2011/04/25</td>
+                                                            </tr>
+
+
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="ln_solid"></div>
-                                    <div class="form-group">
-                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                            <button type="submit" class="btn btn-primary">Cancel</button>
-                                            <button type="submit" class="btn btn-success">Submit</button>
-                                        </div>
-                                    </div>
-
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
 
             </div>
@@ -417,14 +247,50 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="../javascripts/custom.js"></script>
+<script type="text/javascript">
+    // magic.js
+// $(document).ready(function() {
+
+//     // process the form
+//     $('#add-form').submit(function(event) {
+//         // get the form data
+//         // there are many ways to get this data using jQuery (you can use the class or id also)
+//         var formData = {
+//             'name'       : $('input[name=name]').val(),
+//             'latitude'   : $('input[name=latitude]').val(),
+//             'longitude'  : $('input[name=longitude]').val()
+//         };
+//         // process the form
+//         $.ajax({
+//             type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+//             url         : '/api/v1/places', // the url where we want to POST
+//             data        : formData, // our data object
+//             dataType    : 'json', // what type of data do we expect back from the server
+//             encode          : true
+//         })
+//             // using the done promise callback
+//             .done(function(data) {
+//                 // log data to the console so we can see
+//                 console.log(data);
+//                 console.log(data.msg);
+//                 $('#massage').text(data.msg); 
+//                 // here we will handle errors and validation messages
+//             });
+
+//         // stop the form from submitting the normal way and refreshing the page
+//         event.preventDefault();
+//     });
+
+// });
+</script>
 
 <!-- Angular -->
-<!--<script src="/lib/angular/angular.min.js"></script>-->
+<script src="/lib/angular/angular.min.js"></script>
 <!--<script src="/lib/angular-route/angular-route.min.js"></script>-->
-<!--<script src="/javascripts/angular/index.js"></script>-->
+<script src="/javascripts/angular/index.js"></script>
 <!--<script src="/javascripts/angular/config/route-provider.js"></script>-->
 <!--<script src="/javascripts/angular/index.js"></script>-->
-<!--<script src="/javascripts/angular/nodes/controllers/nodeController.js"></script>-->
+<script src="/javascripts/angular/places/placeController.js"></script>
 
 </body>
 </html>

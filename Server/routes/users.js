@@ -3,8 +3,6 @@ var router = express.Router();
 var User = require('../models/user/userModel');
 
 router.get('/', function(req, res, next) {
-
-
   res.send('respond with a resource.');
 });
 

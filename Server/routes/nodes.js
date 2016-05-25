@@ -6,23 +6,123 @@ var express = require('express');
 var router = express.Router();
 var db = require('../db/db');
 var Node = require('../models/node/nodeModel');
+var Place = require('../models/place/placeModel');
 var preProcess = require('../common/nodePreProcess');
 var nodeProcess = new preProcess();
 
 
 
-/* GET home page. */
-router.get('/panel', function(req, res, next) {
-    var node = new Node({lat:12.5,lng:56.52,lastModified:new Date(),owner:"e-fac"});
-    node.save(function(err){
-        if(!err) console.log(" node saved successfully");
-        else console.log(err);
-    });
-    res.send(node);
+
+router.post('/changeState', function(req, res, next) {
+    var nodeId = req.body.nodeId;
+    var nodeState = req.body.state;
+    Node.updateOne({_id:nodeId},functio)
 });
 
-router.get('/nodes',isLoggedIn, function(req,res,next){
 
+router.post('/places', function(req, res){
+    console.log(req.body);
+    var place = new Place({
+        name:req.body.name,
+        lat:req.body.latitude,
+        lng:req.body.longitude,
+        created:new Date()
+    });
+
+    Place.findOne({name:req.body.name}, function(err,data){
+        if (err) {
+            console.log(err);
+            res.json({err:true,msg:"Oops can't find place",data:null});
+        }else if(data == null){
+            place.save(function(err){
+                if(!err){
+                    console.log(" node saved successfully");
+                    res.json({err:false,msg:"Place saved successfully",data:place});
+                }else{
+                    res.json({err:true,msg:"Oops can't save place",data:null});
+                    console.error(err);
+                }
+            });
+        }else{
+            console.log("Place already Exist");
+            res.json({err:true,msg:"Place already Exist",data:place});
+        }
+        
+    });
+});
+
+
+router.get("/places", function(req,res){
+    Place.find(function(err,data){
+        if(!err){
+            res.json({err:false,msg:"got the places",data:data});
+        }else{
+            res.json({err:true,msg:"can't get the places",data:null});
+        }
+    });
+});
+
+router.put("/places", function(req,res){
+    console.log(req.body);
+    Place.findOne({name:res.body.name},function(err,data){
+        if(!err){
+            console.log("found one",data);
+            if(data == null){
+                var place = new Place({
+                    _id: req.body._id,
+                    name: req.body.name,
+                    lat: req.body.lat,
+                    lng: req.body.lng,
+                    created: req.body.created,
+                    __v: req.body.__v });
+
+                place.save(function(err){
+                    if (!err) {
+                        console.log(" place updated successfully");
+                        res.json({err:false,msg:"place updated",data:data});
+                    } else {
+                        console.error(err);
+                        res.json({err:true,msg:"couldn't update the place",data:null});
+                    }
+                });
+            }else{
+                console.log("place already exist");
+                res.json({err:true,msg:"place already exist",data:data});
+            }
+
+        }else{
+            console.log("error",err);
+            res.json({err:true,msg:"can't get the places",data:null});
+        }
+    });
+});
+
+
+
+//router.post('/nodes', function(req,res,next){
+//
+//  var data = res.body.node;
+//    res.io.emit('node', data);
+//    res.header(200);
+//    res.end();
+//
+//});
+
+
+router.post('/nodemcu', function(req,res,next){
+    var node = req.body.node;
+    res.io.sockets.emit('node-mcu',node);
+    res.header(200);
+    res.end();
+});
+
+router.get('/nodemcu', function(req,res,next){
+    res.io.sockets.emit('node-mcu',{name:"chana"});
+    res.header(200);
+    res.end();
+});
+
+router.get('/nodes', function(req,res,next){
     Node.find(function (err, nodes) {
         if (err){
             console.error(err);
@@ -32,10 +132,9 @@ router.get('/nodes',isLoggedIn, function(req,res,next){
         }
         console.log(nodes);
     });
-
 });
 
-router.get('/nodes/:nodeId',isLoggedIn, function(req,res,next){
+router.get('/nodes/:nodeId', function(req,res,next){
     var id = req.params.nodeId;
     Node.findOne({_id:id},function (err, node) {
         if (!err){
@@ -47,10 +146,11 @@ router.get('/nodes/:nodeId',isLoggedIn, function(req,res,next){
     });
 });
 
-router.post('/nodes',isLoggedIn, function(req, res, next) {
+router.post('/nodes', function(req, res, next) {
     var node = new Node({
-        lat:req.body.lat,
-        lng:req.body.lng,
+        nodeId:req.body.nodeId,
+        lat:req.body.latitude,
+        lng:req.body.longitude,
         lastModified:new Date(),
         owner:req.body.owner
     });
@@ -58,41 +158,38 @@ router.post('/nodes',isLoggedIn, function(req, res, next) {
     node.save(function(err){
         if(!err){
             console.log(" node saved successfully");
-            res.json({err:false,msg:"",data:node});
+            res.json({err:false,msg:"node saved",data:node});
         } else{
-            res.json({err:true,msg:err,data:{}});
+            res.json({err:true,msg:"node can not save",data:null});
             console.error(err);
         }
     });
 });
 
 // single update
-router.put('/nodes/:id',isLoggedIn, function(req, res, next) {
-    console.log(req.params.nodeId);
-    var newNode =req.body.node
-    if (Object.isMongooseObject(newNode)) {
-        return Node.findById(req.params.id, function (err, node) {
-
+router.put('/nodes/:id', function(req, res, next) {
+    console.log(req.params.id);
+    var newNode =req.body.node;
+    console.log(newNode);
+        console.log("this mongoose object");
+        Node.findById(req.params.id, function (err, node) {
+            console.log("found the node");
             node.lat = newNode.lat;
             node.lng = newNode.lng;
             node.lastModified = new Date();
             node.owner = newNode.owner;
 
-            return node.save(function (err) {
+            node.save(function (err) {
                 if (!err) {
-                    console.log(" node saved successfully");
-                    res.json({err:false,msg:"",data:node});
+                    console.log("node updated successfully");
+                    res.json({err:false,msg:"node updated",data:node});
                 } else {
-                    res.json({err:true,msg:err,data:{}});
+                    res.json({err:true,msg:"can't update the node",data:null});
                     console.error(err);
                 }
             });
         });
-    }
-    //var nodes= nodeProcess.doProcessFormData(req.body);
-    //res.io.sockets.emit("test",nodeProcess.doProcessFormData(req.body));
 });
-
 
 // bulk update
 // single update
@@ -124,21 +221,19 @@ router.put('/nodes/',isLoggedIn, function(req, res, next) {
 
 
 
-router.delete('/nodes/:id',isLoggedIn, function(req, res, next) {
+router.delete('/nodes/:id', function(req, res, next) {
     console.log(req.params.id);
-    return Node.findById(req.params.id, function (err, node) {
-        return node.remove(function (err) {
+     Node.findById(req.params.id, function (err, node) {
+         node.remove(function (err) {
             if (!err) {
-                console.log(" node saved successfully");
-                res.json({err:false,msg:"",data:node});
+                console.log(" node removed successfully");
+                res.json({err:false,msg:"node removed",data:node});
             } else {
-                res.json({err:true,msg:err,data:{}});
+                res.json({err:true,msg:"can't remove the node",data:null});
                 console.error(err);
             }
         });
     });
-    //var nodes= nodeProcess.doProcessFormData(req.body);
-    //res.io.sockets.emit("test",nodeProcess.doProcessFormData(req.body));
 });
 
 function isLoggedIn(req, res, next) {
@@ -147,7 +242,7 @@ function isLoggedIn(req, res, next) {
     } else {
         res.redirect('/login');
     }
-};
+}
 
 
 module.exports = router;

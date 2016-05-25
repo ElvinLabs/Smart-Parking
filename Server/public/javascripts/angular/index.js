@@ -3,4 +3,4 @@
  */
 
 
-var prkApp = angular.module('prkApp',['ngRoute']);
+var prkApp = angular.module('prkApp',[]);

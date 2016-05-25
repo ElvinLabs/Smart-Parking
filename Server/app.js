@@ -12,7 +12,7 @@ require('./config/passport')(passport);
 var routes = require('./routes/index')(passport);
 var users = require('./routes/users');
 var nodes = require('./routes/nodes');
-var views = require('./routes/view');
+var admin = require('./routes/admin');
 
 var app = express();
 
@@ -27,11 +27,12 @@ app.use(function(req, res, next){
   res.io = io;
   next();
 });
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -45,8 +46,8 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/api', nodes);
-app.use('/home', views);
+app.use('/api/v1', nodes);
+app.use('/admin', admin);
 
 
 

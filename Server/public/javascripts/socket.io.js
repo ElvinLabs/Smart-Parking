@@ -15,6 +15,10 @@ $(document).ready(function(){
 		console.log(data);
 	});
 
+	socket.on('node-mcu', function (data) {
+		console.log(data);
+	});
+
 	socket.on('connect_error',function(data){
 	console.log(' server id offline');
 	});
