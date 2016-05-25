@@ -3,7 +3,7 @@
  */
 prkApp.controller('nodeController', function($scope, $http, $timeout){
 
-    $scope.apiUrl           = "http://127.0.0.1:3000/api/v1/";
+    $scope.apiUrl           = "http://ec2-52-39-190-28.us-west-2.compute.amazonaws.com/api/v1/";
     $scope.node             = {};
     $scope.massage          = "error msg";
     $scope.nodes            = [];
