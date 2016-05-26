@@ -21,7 +21,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Smart park</span></a>
+                    <a href="index.html" class="site_title"><i class="fa fa-car"></i> <span>Smart park</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -49,6 +49,19 @@
                                 <ul class="nav child_menu">
                                     <li><a href="places">Places</a>
                                     <li><a href="nodes">Nodes</a>
+                                </ul>
+                            </li>
+                            <li>
+                                <a><i class="fa fa-book"></i> Help <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="nodeHelp">Node</a>
+                                    <li><a href="placeHelp">Place</a>
+                                </ul>
+                            </li>
+                            <li>
+                                <a><i class="fa fa-paper-plane-o"></i> Test <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="nodeTest">Node Testing page</a>
                                 </ul>
                             </li>
                         </ul>
@@ -114,16 +127,6 @@
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                     </li>
-                                    <!--<li class="dropdown">-->
-                                        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>-->
-                                        <!--<ul class="dropdown-menu" role="menu">-->
-                                            <!--<li><a href="#">Settings 1</a>-->
-                                            <!--</li>-->
-                                            <!--<li><a href="#">Settings 2</a>-->
-                                            <!--</li>-->
-                                        <!--</ul>-->
-                                    <!--</li>-->
-                                    <!--<li><a class="close-link"><i class="fa fa-close"></i></a></li>-->
                                     <li><a class=""><i class="fa fa-refresh" ng-click="dataToDefault()"></i></a></li>
                                 </ul>
                                 <div class="clearfix"></div>
@@ -145,7 +148,7 @@
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" >nodeId <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="number" ng-model="node.nodeId" required="required" class="form-control col-md-7 col-xs-12">
+                                            <input type="number" ng-model="node.nodeId" ng-disabled="true" required="required" class="form-control col-md-7 col-xs-12">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -161,19 +164,34 @@
                                             <input  class="form-control col-md-7 col-xs-12" ng-model="node.latitude" type="number" step="any">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="checkbox">
-                                            <label>
-                                                 <input ng-model="node.isActive" type="checkbox" value="">Active {{node.isActive}}
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                 <input ng-model="node.isDisable" type="checkbox" value="">Disable {{node.isDisable}}
-                                            </label>
-                                        </div>
 
+                                    <div class="form-group">
+                                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Active</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12" style="padding-top: 8px;">
+                                            <input  class="form-contro " ng-model="node.isActive" type="checkbox">
+                                        </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Disable</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12" style="padding-top: 8px;">
+                                            <input  class="form-contro " ng-model="node.isDisable" type="checkbox">
+                                        </div>
+                                    </div>
+
+                                    <!--<div class="form-group">-->
+                                        <!--<div class="checkbox col-sm-6">-->
+                                            <!--<div class="col-sm-6">-->
+                                                <!--<input style="float: right" ng-model="node.isActive" type="checkbox" value="">-->
+                                            <!--</div>-->
+                                            <!--<label class="control-label col-md-6 col-sm-6 col-xs-6">Active {{node.isActive}}</label>-->
+                                        <!--</div>-->
+                                        <!--<div class="checkbox col-sm-6">-->
+                                            <!--<label>-->
+                                                 <!--<input ng-model="node.isDisable" type="checkbox" value="">Disable {{node.isDisable}}-->
+                                            <!--</label>-->
+                                        <!--</div>-->
+
+                                    <!--</div>-->
 
                                     <div class="ln_solid"></div>
 

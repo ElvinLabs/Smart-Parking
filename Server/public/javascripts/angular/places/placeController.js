@@ -1,7 +1,7 @@
 prkApp.controller('placeController',function($scope,$http,$timeout){
 
-    $scope.apiUrl = "http://ec2-52-39-190-28.us-west-2.compute.amazonaws.com/api/v1/places";
-    //$scope.apiUrl = "http://127.0.0.1:3000/api/v1/places";
+    //$scope.apiUrl = "http://ec2-52-39-190-28.us-west-2.compute.amazonaws.com/api/v1/places";
+    $scope.apiUrl = "http://127.0.0.1:3000/api/v1/places";
     $scope.place = {};
     $scope.isMassageEnable= false;
     $scope.place.isDisable = false;
@@ -61,7 +61,8 @@ prkApp.controller('placeController',function($scope,$http,$timeout){
             lat:$scope.place.latitude,
             lng :$scope.place.longitude,
             name:$scope.place.name,
-            numOfSlots:$scope.selectedPlace.numOfSlots
+            numOfSlots:$scope.selectedPlace.numOfSlots,
+            type:$scope.place.prkType
         };
         console.log(place);
 
@@ -102,6 +103,7 @@ prkApp.controller('placeController',function($scope,$http,$timeout){
         $scope.place.latitude = $scope.places[index].lat;
         $scope.place.longitude = $scope.places[index].lng;
         $scope.place.isDisable = $scope.places[index].isDisable;
+        $scope.place.type = $scope.places[index].prkType;
 
     };
 

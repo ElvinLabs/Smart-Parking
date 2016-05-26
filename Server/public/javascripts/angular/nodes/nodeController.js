@@ -3,8 +3,8 @@
  */
 prkApp.controller('nodeController', function($scope, $http, $timeout){
 
-    $scope.apiUrl           = "http://ec2-52-39-190-28.us-west-2.compute.amazonaws.com/api/v1/";
-    //$scope.apiUrl = "http://127.0.0.1:3000/api/v1/";
+    //$scope.apiUrl           = "http://ec2-52-39-190-28.us-west-2.compute.amazonaws.com/api/v1/";
+    $scope.apiUrl = "http://127.0.0.1:3000/api/v1/";
     $scope.node             = {};
     $scope.node.isActive = false;
     $scope.node.isDisable = false;
@@ -140,6 +140,7 @@ prkApp.controller('nodeController', function($scope, $http, $timeout){
     $scope.placeOnChange = function(name){
       $scope.node.owner = name;
         console.log($scope.node);
+        $scope.node.nodeId = $scope.places.defaultPlace.numOfSlots;
     };
 
     function showMassage(msg){
@@ -162,6 +163,9 @@ prkApp.controller('nodeController', function($scope, $http, $timeout){
         $scope.isDeleteDisabled = true;
         $scope.isUpdateDisabled = true;
         $scope.isAddDisabled = false;
+
+        $scope.node.isActive = false;
+        $scope.node.isDisable = false;
     }
 
 

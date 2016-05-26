@@ -29,7 +29,8 @@ router.post('/places', function(req, res){
         created:new Date(),
         numOfSlots:0,
         freeSlots:0,
-        isDisable:req.body.isDisable
+        isDisable:req.body.isDisable,
+        prkType:req.body.parkType
     });
 
     Place.findOne({name:req.body.name}, function(err,data){
@@ -77,6 +78,7 @@ router.put("/places", function(req,res){
             place.lng = req.body.lng;
             place.isDisable = req.body.isDisable;
             place.lng = req.body.lng;
+            place.prkType =req.body.prkType;
 
             console.log("-------------- updated place-------------");
             console.log(place);
@@ -169,6 +171,12 @@ router.post('/nodes', function(req, res, next) {
     node.save(function(err){
         if(!err){
             console.log(" node saved successfully");
+            Place.findOneAndUpdate({name:node.owner},{$inc:{numOfSlots:1}},function(err,place){
+                if(err){
+                    console.log("some thing went wrong");
+                }
+                console.log("increased the count by 1");
+            });
             res.json({err:false,msg:"node saved",data:node});
         } else{
             res.json({err:true,msg:"node can not save",data:null});
@@ -240,6 +248,12 @@ router.delete('/nodes/:id', function(req, res, next) {
          node.remove(function (err) {
             if (!err) {
                 console.log(" node removed successfully");
+                Place.findOneAndUpdate({name:node.owner},{$inc:{numOfSlots:-1}},function(err,place){
+                    if(err){
+                        console.log("some thing went wrong");
+                    }
+                    console.log(" increased count by -1");
+                });
                 res.json({err:false,msg:"node removed",data:node});
             } else {
                 res.json({err:true,msg:"can't remove the node",data:null});

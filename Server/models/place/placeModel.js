@@ -6,7 +6,7 @@ var placeSchema = new Schema({
 	lat:{type:Number},
 	lng:{type:Number},
 	created:{type:Date},
-	type:{type:String, enum:['indoor','outdoor']},
+	prkType:{type:String, enum:['Indoor','Outdoor']},
 	numOfSlots:{type:Number,min:0},
 	freeSlots:{type:Number,min:0},
 	isDisable:{type:Boolean, default:true}
