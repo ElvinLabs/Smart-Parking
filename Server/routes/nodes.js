@@ -7,8 +7,9 @@ var router = express.Router();
 var db = require('../db/db');
 var Node = require('../models/node/nodeModel');
 var Place = require('../models/place/placeModel');
-var preProcess = require('../common/nodePreProcess');
-var nodeProcess = new preProcess();
+var placedate = require('../common/placeData');
+var dammyData = new placedate();
+
 
 
 router.post('/changeState', function(req, res, next) {
@@ -53,8 +54,16 @@ router.post('/nodemcu', function(req,res,next){
     res.end();
 });
 
-router.get('/nodemcu', function(req,res,next){
-    res.io.sockets.emit('node-mcu',{name:"chana"});
+router.post('/mcu', function(req,res,next){
+    console.log(req.body);
+    console.log(dammyData);
+    if(req.body.node.isActive == true){
+        dammyData[0].availableSlots++;
+        res.io.sockets.emit('node-mcu',dammyData);
+    }else{
+        dammyData[0].availableSlots--;
+        res.io.sockets.emit('node-mcu',dammyData);
+    }
     res.header(200);
     res.end();
 });
