@@ -61,7 +61,7 @@ prkApp.controller('nodeTestController',function($scope,$http,$timeout){
 
     $scope.sendRequest = function(index){
       //console.log($scope.places[index]);
-        $http.post($scope.apiUrl,{node:$scope.places[index]})
+        $http.post($scope.apiUrl,{node:$scope.places})
             .then(function(data){
                 console.log("request sent");
                 console.log(data);
