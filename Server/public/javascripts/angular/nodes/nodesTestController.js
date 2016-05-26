@@ -4,8 +4,8 @@
 prkApp.controller('nodeTestController',function($scope,$http,$timeout){
 
     //$scope.apiUrl = "http://ec2-52-39-190-28.us-west-2.compute.amazonaws.com/api/v1/places";
-    $scope.apiUrl = "http://127.0.0.1:3000/api/v1/nodemcu";
-    //$scope.apiUrl           = "http://ec2-52-39-190-28.us-west-2.compute.amazonaws.com/api/v1/nodemcu";
+    //$scope.apiUrl = "http://127.0.0.1:3000/api/v1/nodemcu";
+    $scope.apiUrl= "http://ec2-52-39-190-28.us-west-2.compute.amazonaws.com/api/v1/nodemcu";
 
     $scope.places = [
         {
@@ -64,15 +64,23 @@ prkApp.controller('nodeTestController',function($scope,$http,$timeout){
         $http.post($scope.apiUrl,{node:$scope.places[index]})
             .then(function(data){
                 console.log("request sent");
+                console.log(data);
             }, function (err) {
                 console.log(err);
             });
     };
 
-
-
-
-
+    $scope.sendBulk = function(){
+        for(id in $scope.places){
+            console.log($scope.places[id]);
+            $http($scope.apiUrl,{node:$scope.places[id]})
+                .then(function(data){
+                    console.log(data);
+                }, function (err) {
+                    console.log(err);
+                });
+        }
+    };
 
     function showMassage(msg){
     }

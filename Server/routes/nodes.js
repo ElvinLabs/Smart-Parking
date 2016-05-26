@@ -11,14 +11,53 @@ var preProcess = require('../common/nodePreProcess');
 var nodeProcess = new preProcess();
 
 
-
-
 router.post('/changeState', function(req, res, next) {
     var nodeId = req.body.nodeId;
-    var nodeState = req.body.state;
-    Node.updateOne({_id:nodeId},functio)
+    var isActive = req.body.isActive;
+    var owner = req.body.owner;
+    var id = req.body._id;
+
+    Node.findOneAndUpdate({owner:owner,nodeId:nodeId},{$set:{isActive:isActive}}, function(err,node){
+        if(err) {
+            console.log("Oops can't update the node");
+            re.header(500);
+            res.end();
+        } else{
+            console.log(node);
+            var incVal = 0;
+            if( isActive) incVal=1;
+            else incVal = -1;
+
+            Place.findOneAndUpdate({name:owner},{$inc:{availableSlots:incVal}}, function(err,data){
+                if(err) {
+                    console.log(err);
+                    re.header(500);
+                    res.end();
+                }
+                else {
+                    console.log("value changes by ",incVal);
+                    res.io.sockets.emit("node-mcu",data);
+                    re.header(200);
+                    res.end();
+                }
+            });
+        }
+    });
 });
 
+
+router.post('/nodemcu',isLoggedIn, function(req,res,next){
+    var node = req.body.node;
+    res.io.sockets.emit('node-mcu',node);
+    res.header(200);
+    res.end();
+});
+
+router.get('/nodemcu', function(req,res,next){
+    res.io.sockets.emit('node-mcu',{name:"chana"});
+    res.header(200);
+    res.end();
+});
 
 router.post('/places', function(req, res){
     console.log(req.body);
@@ -28,9 +67,9 @@ router.post('/places', function(req, res){
         lng:req.body.longitude,
         created:new Date(),
         numOfSlots:0,
-        freeSlots:0,
+        availableSlots:0,
         isDisable:req.body.isDisable,
-        prkType:req.body.parkType
+        prkType:req.body.prkType
     });
 
     Place.findOne({name:req.body.name}, function(err,data){
@@ -118,18 +157,6 @@ router.delete("/places/:id", function(req,res){
 });
 
 
-router.post('/nodemcu', function(req,res,next){
-    var node = req.body.node;
-    res.io.sockets.emit('node-mcu',node);
-    res.header(200);
-    res.end();
-});
-
-router.get('/nodemcu', function(req,res,next){
-    res.io.sockets.emit('node-mcu',{name:"chana"});
-    res.header(200);
-    res.end();
-});
 
 router.get('/nodes', function(req,res,next){
     Node.find(function (err, nodes) {

@@ -1,7 +1,7 @@
 prkApp.controller('placeController',function($scope,$http,$timeout){
 
-    //$scope.apiUrl = "http://ec2-52-39-190-28.us-west-2.compute.amazonaws.com/api/v1/places";
-    $scope.apiUrl = "http://127.0.0.1:3000/api/v1/places";
+    $scope.apiUrl = "http://ec2-52-39-190-28.us-west-2.compute.amazonaws.com/api/v1/places";
+    //$scope.apiUrl = "http://127.0.0.1:3000/api/v1/places";
     $scope.place = {};
     $scope.isMassageEnable= false;
     $scope.place.isDisable = false;
@@ -28,13 +28,13 @@ prkApp.controller('placeController',function($scope,$http,$timeout){
                 showMassage(data.data.msg);
                 $timeout(hideMassage,5000);
                 if(data.data.data != null) $scope.places.push(data.data.data);
-                //newPlaceSetDefault();
+                newPlaceSetDefault();
             }, function(err){
                 console.log("err");
                 console.log(err);
                 showMassage(data.data.msg);
                 $timeout(hideMassage,5000);
-                //newPlaceSetDefault();
+                newPlaceSetDefault();
             });
     };
 
@@ -56,13 +56,13 @@ prkApp.controller('placeController',function($scope,$http,$timeout){
             __v:$scope.selectedPlace.__v,
             _id:$scope.selectedPlace._id,
             created:$scope.selectedPlace.created,
-            freeSlots:$scope.selectedPlace.freeSlots,
+            availableSlots:$scope.selectedPlace.availableSlots,
             isDisable:$scope.place.isDisable,
             lat:$scope.place.latitude,
             lng :$scope.place.longitude,
             name:$scope.place.name,
             numOfSlots:$scope.selectedPlace.numOfSlots,
-            type:$scope.place.prkType
+            prkType:$scope.place.prkType
         };
         console.log(place);
 
@@ -71,9 +71,15 @@ prkApp.controller('placeController',function($scope,$http,$timeout){
                 console.log("updated the places");
                 console.log(data.data.data);
                 if(data.data.data != null && data.data.err == false) $scope.places[$scope.selectedPlaceIndex] = data.data.data;
+                showMassage(data.data.msg);
+                $timeout(hideMassage,5000);
+                newPlaceSetDefault()
             },function(err){
                 console.log("got an error");
                 console.log(err);
+                showMassage(data.data.msg);
+                $timeout(hideMassage,5000);
+                newPlaceSetDefault()
             });
     };
 
@@ -103,7 +109,7 @@ prkApp.controller('placeController',function($scope,$http,$timeout){
         $scope.place.latitude = $scope.places[index].lat;
         $scope.place.longitude = $scope.places[index].lng;
         $scope.place.isDisable = $scope.places[index].isDisable;
-        $scope.place.type = $scope.places[index].prkType;
+        $scope.place.prkType = $scope.places[index].prkType;
 
     };
 
