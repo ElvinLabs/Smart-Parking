@@ -14,42 +14,42 @@ prkApp.controller('nodeTestController',function($scope,$http,$timeout){
             name:"E-Fac (near the new chemical building)",
             numOfSlots:20,
             availableSlots:5,
-            type:"Indoor"
+            prkType:"Indoor"
         },{
             lat:7.252603,
             lng:80.591643,
             name:"E-Fac (near the faculty canteen)",
             numOfSlots:12,
             availableSlots:3,
-            type:"Indoor"
+            prkType:"Indoor"
         },{
             lat:7.254319,
             lng:80.596698,
             name:"Senate 01",
             numOfSlots:30,
             availableSlots:9,
-            type:"Outdoor"
+            prkType:"Outdoor"
         },{
             lat:7.254032,
             lng:80.596922,
             name:"Senate 02",
             numOfSlots:10,
             availableSlots:2,
-            type:"Outdoor"
+            prkType:"Outdoor"
         },{
             lat:7.259352,
             lng:80.599135,
             name:"Science",
             numOfSlots:7,
             availableSlots:1,
-            type:"Outdoor"
+            prkType:"Outdoor"
         },{
             lat:7.253579,
             lng:80.598277,
             name:"Medicine",
             numOfSlots:14,
             availableSlots:6,
-            type:"Indoor"
+            prkType:"Indoor"
         }
     ];
 
