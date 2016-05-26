@@ -16,6 +16,7 @@ $(document).ready(function(){
 	});
 
 	socket.on('node-mcu', function (data) {
+		console.log('node-mcu event data');
 		console.log(data);
 	});
 

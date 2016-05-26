@@ -9,12 +9,25 @@ router.get('/', function(req, res, next) {
 
 router.get('/places', function(req, res, next) {
   res.header(200);
-  res.render('pages/addPlace');
+  res.render('pages/places');
 });
 
 router.get('/nodes', function(req, res, next) {
   res.header(200);
   res.render('pages/nodes');
 });
+
+
+
+
+//function isLoggedIn(req, res, next) {
+//  if (req.user) {
+//    next();
+//  } else {
+//    res.redirect('/login');
+//  }
+//}
+
+
 
 module.exports = router;

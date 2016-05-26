@@ -51,6 +51,19 @@
                                     <li><a href="nodes">Nodes</a>
                                 </ul>
                             </li>
+                            <li>
+                                <a><i class="fa fa-book"></i> Help <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="nodeHelp">Node</a>
+                                    <li><a href="placeHelp">Place</a>
+                                </ul>
+                            </li>
+                            <li>
+                                <a><i class="fa fa-paper-plane-o"></i> Test <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="nodeTest">Node Testing page</a>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
 
@@ -152,7 +165,16 @@
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input ng-model="place.longitude" class="form-control col-md-7 col-xs-12" type="number" step="any">
                                         </div>{{longitude}}
-                                    </div>                            
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input ng-model="place.isDisable" type="checkbox" value="">Disable {{place.isDisable}}
+                                            </label>
+                                        </div>
+
+                                    </div>
 
                                     <div class="ln_solid"></div>
 
@@ -161,7 +183,7 @@
                                             <button type="button" class="btn btn-primary">Cancel</button>
                                             <button type="button" ng-click="addPlace()" ng-disabled="isAddDisabled" class="btn btn-success">Add</button>
                                             <button type="button" ng-click="updatePlace()" ng-disabled="isUpdateDisabled" class="btn btn-success">Update</button>
-                                            <button type="button"  ng-disabled="isDeleteDisabled" class="btn btn-success">Delete</button>
+                                            <button type="button" ng-click="deletePlace()"  ng-disabled="isDeleteDisabled" class="btn btn-danger">Delete</button>
                                         </div>
                                     </div>
 
@@ -200,10 +222,12 @@
                                                             <thead>
                                                             <tr>
                                                                 <th>Name</th>
-                                                                <th>longitude</th>
-                                                                <th>latitude</th>
-                                                                <th>created</th>
-                                                                <th>disabled</th>
+                                                                <th>Longitude</th>
+                                                                <th>Latitude</th>
+                                                                <th>Created</th>
+                                                                <th>Disabled</th>
+                                                                <th>Number of Slots</th>
+                                                                <th>Free Slots</th>
                                                             </tr>
                                                             </thead>
 
@@ -213,7 +237,9 @@
                                                                 <td>{{place.lat}}</td>
                                                                 <td>{{place.lng}}</td>
                                                                 <td>{{place.created |date}}</td>
-                                                                <td>2011/04/25</td>
+                                                                <td>{{place.isDisable}}</td>
+                                                                <td>{{place.numOfSlots}}</td>
+                                                                <td>{{place.freeSlots}}</td>
                                                             </tr>
 
 

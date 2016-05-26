@@ -33,6 +33,11 @@ module.exports = function(passport){
         failureFlash: true // allow flash messages
     }));
 
+    router.get('/admin/nodeTest', function(req, res, next) {
+        res.header(200);
+        res.render('pages/nodeTest');
+    });
+
     function isLoggedIn(req, res, next) {
         if (req.user) {
             next();
@@ -40,8 +45,6 @@ module.exports = function(passport){
             res.redirect('/login');
         }
     }
-
-
 
 
     return router;

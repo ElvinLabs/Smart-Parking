@@ -1,8 +1,11 @@
 prkApp.controller('placeController',function($scope,$http,$timeout){
 
-    $scope.apiUrl = "http://ec2-52-39-190-28.us-west-2.compute.amazonaws.com/api/v1/places";
+    //$scope.apiUrl = "http://ec2-52-39-190-28.us-west-2.compute.amazonaws.com/api/v1/places";
+    $scope.apiUrl = "http://127.0.0.1:3000/api/v1/places";
     $scope.place = {};
     $scope.isMassageEnable= false;
+    $scope.place.isDisable = false;
+    $scope.selectedPlaceIndex = -1;
     $scope.massage = "error msg";
     $scope.places = [];
     $scope.selectedPlace = {};
@@ -24,13 +27,14 @@ prkApp.controller('placeController',function($scope,$http,$timeout){
                 console.log(data);
                 showMassage(data.data.msg);
                 $timeout(hideMassage,5000);
-                newPlaceSetDefault();
+                if(data.data.data != null) $scope.places.push(data.data.data);
+                //newPlaceSetDefault();
             }, function(err){
                 console.log("err");
                 console.log(err);
                 showMassage(data.data.msg);
                 $timeout(hideMassage,5000);
-                newPlaceSetDefault();
+                //newPlaceSetDefault();
             });
     };
 
@@ -48,10 +52,24 @@ prkApp.controller('placeController',function($scope,$http,$timeout){
     };
 
     $scope.updatePlace = function(){
-        $http.put($scope.apiUrl,$scope.selectedPlace)
+        var place = {
+            __v:$scope.selectedPlace.__v,
+            _id:$scope.selectedPlace._id,
+            created:$scope.selectedPlace.created,
+            freeSlots:$scope.selectedPlace.freeSlots,
+            isDisable:$scope.place.isDisable,
+            lat:$scope.place.latitude,
+            lng :$scope.place.longitude,
+            name:$scope.place.name,
+            numOfSlots:$scope.selectedPlace.numOfSlots
+        };
+        console.log(place);
+
+        $http.put($scope.apiUrl,place)
             .then(function(data){
                 console.log("updated the places");
                 console.log(data.data.data);
+                if(data.data.data != null && data.data.err == false) $scope.places[$scope.selectedPlaceIndex] = data.data.data;
             },function(err){
                 console.log("got an error");
                 console.log(err);
@@ -59,19 +77,31 @@ prkApp.controller('placeController',function($scope,$http,$timeout){
     };
 
     $scope.deletePlace = function(){
-
+        $http.delete($scope.apiUrl+"/"+$scope.selectedPlace._id).
+            then(function (data) {
+                console.log("place remove");
+                console.log(data.data);
+            }, function (err) {
+                console.log("got error");
+                console.log(err);
+            });
     };
 
 
     $scope.selectedRow = function (index) {
         console.log(index);
+        $scope.selectedPlaceIndex = index;
+
         $scope.isAddDisabled = true;
         $scope.isUpdateDisabled = false;
+        $scope.isDeleteDisabled = false;
+
         $scope.selectedPlace = $scope.places[index];
 
         $scope.place.name = $scope.places[index].name;
         $scope.place.latitude = $scope.places[index].lat;
         $scope.place.longitude = $scope.places[index].lng;
+        $scope.place.isDisable = $scope.places[index].isDisable;
 
     };
 

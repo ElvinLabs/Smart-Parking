@@ -26,7 +26,10 @@ router.post('/places', function(req, res){
         name:req.body.name,
         lat:req.body.latitude,
         lng:req.body.longitude,
-        created:new Date()
+        created:new Date(),
+        numOfSlots:0,
+        freeSlots:0,
+        isDisable:req.body.isDisable
     });
 
     Place.findOne({name:req.body.name}, function(err,data){
@@ -63,50 +66,54 @@ router.get("/places", function(req,res){
 });
 
 router.put("/places", function(req,res){
-    console.log(req.body);
-    Place.findOne({name:res.body.name},function(err,data){
-        if(!err){
-            console.log("found one",data);
-            if(data == null){
-                var place = new Place({
-                    _id: req.body._id,
-                    name: req.body.name,
-                    lat: req.body.lat,
-                    lng: req.body.lng,
-                    created: req.body.created,
-                    __v: req.body.__v });
+    console.log("-------------- places PUT--------------");
+    console.log(req.body.name);
+    Place.findOne({name:req.body.name},function(err,place){
+        if(!err) {
+            console.log("found the existing one");
+            console.log(place);
+            place.name = req.body.name;
+            place.lat = req.body.lat;
+            place.lng = req.body.lng;
+            place.isDisable = req.body.isDisable;
+            place.lng = req.body.lng;
 
-                place.save(function(err){
-                    if (!err) {
-                        console.log(" place updated successfully");
-                        res.json({err:false,msg:"place updated",data:data});
-                    } else {
-                        console.error(err);
-                        res.json({err:true,msg:"couldn't update the place",data:null});
-                    }
-                });
-            }else{
-                console.log("place already exist");
-                res.json({err:true,msg:"place already exist",data:data});
-            }
+            console.log("-------------- updated place-------------");
+            console.log(place);
 
-        }else{
-            console.log("error",err);
-            res.json({err:true,msg:"can't get the places",data:null});
+            place.save(function(err1){
+                if(!err1){
+                    console.log("place updated");
+                    res.json({err:false,msg:"place updated",data:place});
+                }else{
+                    console.log("place not updated");
+                    res.json({err:true,msg:"can't update the place",data:null});
+                }
+            });
+
         }
+        else {
+            console.log(err);
+            res.json({err:true,msg:"can't find a place",data:null});
+        }
+
     });
 });
 
 
-
-//router.post('/nodes', function(req,res,next){
-//
-//  var data = res.body.node;
-//    res.io.emit('node', data);
-//    res.header(200);
-//    res.end();
-//
-//});
+router.delete("/places/:id", function(req,res){
+    Place.findById(req.params.id, function (err, place) {
+        place.remove(function (err) {
+            if (!err) {
+                console.log(" place removed successfully");
+                res.json({err:false,msg:"place removed",data:place});
+            } else {
+                res.json({err:true,msg:"can't remove the place",data:null});
+                console.error(err);
+            }
+        });
+    });
+});
 
 
 router.post('/nodemcu', function(req,res,next){
@@ -146,13 +153,17 @@ router.get('/nodes/:nodeId', function(req,res,next){
     });
 });
 
+
+
 router.post('/nodes', function(req, res, next) {
     var node = new Node({
         nodeId:req.body.nodeId,
         lat:req.body.latitude,
         lng:req.body.longitude,
         lastModified:new Date(),
-        owner:req.body.owner
+        owner:req.body.owner,
+        isActive:req.body.isActive,
+        isDisable:req.body.isDisable
     });
     console.log(node);
     node.save(function(err){
@@ -178,6 +189,8 @@ router.put('/nodes/:id', function(req, res, next) {
             node.lng = newNode.lng;
             node.lastModified = new Date();
             node.owner = newNode.owner;
+            node.isActive = newNode.isActive;
+            node.isDisable = newNode.isDisable;
 
             node.save(function (err) {
                 if (!err) {

@@ -3,8 +3,11 @@
  */
 prkApp.controller('nodeController', function($scope, $http, $timeout){
 
-    $scope.apiUrl           = "http://ec2-52-39-190-28.us-west-2.compute.amazonaws.com/api/v1/";
+    //$scope.apiUrl           = "http://ec2-52-39-190-28.us-west-2.compute.amazonaws.com/api/v1/";
+    $scope.apiUrl = "http://127.0.0.1:3000/api/v1/";
     $scope.node             = {};
+    $scope.node.isActive = false;
+    $scope.node.isDisable = false;
     $scope.massage          = "error msg";
     $scope.nodes            = [];
     //$scope.places           = [];
@@ -46,13 +49,14 @@ prkApp.controller('nodeController', function($scope, $http, $timeout){
                 console.log(data.data.data);
                 showMassage(data.data.msg);
                 $timeout(hideMassage, 5000);
-                setDatadefault();
+                setDataDefault();
+                if(data.data.data != null) $scope.nodes.push(data.data.data);
             }, function(err){
                 console.log("error ocured");
                 console.log(err);
                 showMassage(data.data.msg);
                 $timeout(hideMassage, 5000);
-                setDatadefault();
+                setDataDefault();
             });
     };
 
@@ -78,16 +82,25 @@ prkApp.controller('nodeController', function($scope, $http, $timeout){
             lng:$scope.node.longitude,
             lastModified:$scope.nodes[$scope.currentNodeIndex].lastModified,
             __v:$scope.nodes[$scope.currentNodeIndex].__v,
-            nodeId:$scope.nodes[$scope.currentNodeIndex].nodeId
+            nodeId:$scope.nodes[$scope.currentNodeIndex].nodeId,
+            isDisable:$scope.node.isDisable,
+            isActive:$scope.node.isActive
         };
         console.log(nodeSelected);
         $http.put($scope.apiUrl+"nodes/"+nodeSelected._id,{node:nodeSelected})
             .then( function(data){
                 console.log("node updated");
                 console.log(data.data);
+                if(data.data.data != null) $scope.nodes[$scope.currentNodeIndex] = data.data.data;
+                showMassage(data.data.msg);
+                $timeout(hideMassage, 5000);
+                setDataDefault();
             }, function(err){
                 console.log(" got an error");
                 console.log(err);
+                showMassage(data.data.msg);
+                $timeout(hideMassage, 5000);
+                setDataDefault();
             });
     };
 
@@ -111,6 +124,8 @@ prkApp.controller('nodeController', function($scope, $http, $timeout){
         $scope.node.latitude    = $scope.nodes[index].lat;
         $scope.node.longitude   = $scope.nodes[index].lng;
         $scope.node.nodeId      = $scope.nodes[index].nodeId;
+        $scope.node.isActive      = $scope.nodes[index].isActive;
+        $scope.node.isDisable      = $scope.nodes[index].isDisable;
         $scope.places.defaultPlace    = {name:$scope.nodes[index].owner};
 
         $scope.isAddDisabled = true;
