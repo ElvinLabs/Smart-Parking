@@ -3,8 +3,9 @@ var router = express.Router();
 var User = require('../models/user/userModel');
 
 router.get('/',isLoggedIn, function(req, res, next) {
+  console.log(req.user);
   res.header(200);
-  res.render('pages/home');
+  res.render('pages/home',{user:{firstName:"Ajantha"}});
 });
 
 router.get('/places',isLoggedIn, function(req, res, next) {

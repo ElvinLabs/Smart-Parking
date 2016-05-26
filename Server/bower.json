@@ -25,6 +25,7 @@
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.6.2",
     "angular": "^1.5.5",
-    "angular-route": "^1.5.5"
+    "angular-route": "^1.5.5",
+    "Chart.js": "^2.1.3"
   }
 }
