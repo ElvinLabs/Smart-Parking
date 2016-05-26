@@ -17,7 +17,7 @@ router.get('/nodes',isLoggedIn, function(req, res, next) {
   res.render('pages/nodes');
 });
 
-router.get('/nodeTest',function(req, res, next) {
+router.get('/nodeTest',isLoggedIn,function(req, res, next) {
   console.log(req.user);
   res.header(200);
   res.render('pages/nodeTest');

@@ -46,7 +46,7 @@ router.post('/changeState', function(req, res, next) {
 });
 
 
-router.post('/nodemcu',isLoggedIn, function(req,res,next){
+router.post('/nodemcu', function(req,res,next){
     var node = req.body.node;
     res.io.sockets.emit('node-mcu',node);
     res.header(200);
