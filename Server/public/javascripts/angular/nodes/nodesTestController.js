@@ -73,7 +73,7 @@ prkApp.controller('nodeTestController',function($scope,$http,$timeout){
     $scope.sendBulk = function(){
         for(id in $scope.places){
             console.log($scope.places[id]);
-            $http($scope.apiUrl,{node:$scope.places[id]})
+            $http.post($scope.apiUrl,{node:$scope.places[id]})
                 .then(function(data){
                     console.log(data);
                 }, function (err) {

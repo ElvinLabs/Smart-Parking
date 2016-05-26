@@ -36,7 +36,7 @@ router.post('/changeState', function(req, res, next) {
                 }
                 else {
                     console.log("value changes by ",incVal);
-                    res.io.sockets.emit("node-mcu",data);
+                    res.io.sockets.emit("node-mcu",[data]);
                     re.header(200);
                     res.end();
                 }
@@ -48,7 +48,7 @@ router.post('/changeState', function(req, res, next) {
 
 router.post('/nodemcu', function(req,res,next){
     var node = req.body.node;
-    res.io.sockets.emit('node-mcu',node);
+    res.io.sockets.emit('node-mcu',[node]);
     res.header(200);
     res.end();
 });
