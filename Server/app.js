@@ -18,6 +18,8 @@ var app = express();
 
 var server = require('http').Server(app);  
 var io = require('socket.io')(server);
+var self = this;
+var socket;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -133,8 +135,12 @@ var places = [
 
 io.sockets.on("connection", function (socket) {
   console.log("new user connected");
+  self.socket = socket.emit;
   socket.emit("new-client",places);
+    require("./routes/mqtt-client")(socket);
 });
+
+
 
 //var bcrypt   = require('bcrypt-nodejs');
 //console.log(bcrypt.hashSync("123456", bcrypt.genSaltSync(8), null));

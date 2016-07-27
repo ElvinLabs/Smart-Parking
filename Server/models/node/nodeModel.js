@@ -11,5 +11,4 @@ var mongoose = require('mongoose'),
         isActive:{type:Boolean,default:false}
     });
 
-
 module.exports = mongoose.model('Node', nodeSchema);

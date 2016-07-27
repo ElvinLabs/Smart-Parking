@@ -63,6 +63,9 @@ router.post('/mcu', function(req,res,next){
     }else{
         dammyData[0].availableSlots--;
         res.io.sockets.emit('node-mcu',dammyData);
+        
+        
+        
     }
     res.header(200);
     res.end();

@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var socket = io();
 
 	socket.on('connect',function(data){
-		console.log('connected to ther server');
+		console.log('connected to socket.io the server');
 		// socket.on()
 	});
 
@@ -28,4 +28,4 @@ $(document).ready(function(){
 	console.log(data);
 	});
 
-})
+});

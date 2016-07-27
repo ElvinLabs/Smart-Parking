@@ -24,6 +24,13 @@ router.get('/nodeTest',isLoggedIn,function(req, res, next) {
   res.render('pages/nodeTest',{user:req.user});
 });
 
+
+router.get('/mqtt-data',isLoggedIn,function(req, res, next) {
+  console.log(req.user);
+  res.header(200);
+  res.render('pages/mqtt',{user:req.user});
+});
+
 function isLoggedIn(req, res, next) {
   if (req.user) {
     next();

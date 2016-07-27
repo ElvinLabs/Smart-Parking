@@ -13,26 +13,26 @@ $(document).ready(function () {
         var availableSlots = [];
         var numOfSlots = [];
         var names = [];
-        for(id in data){
-            names.push(data[id].name);
-            numOfSlots.push(data[id].numOfSlots);
-            availableSlots.push(data[id].availableSlots);
-        }
-        generateGraph(names, numOfSlots, availableSlots);
+        // for(id in data){
+        //     names.push(data[id].name);
+        //     numOfSlots.push(data[id].numOfSlots);
+        //     availableSlots.push(data[id].availableSlots);
+        // }
+        // generateGraph(names, numOfSlots, availableSlots);
     });
 
     socket.on('node-mcu', function (data) {
         console.log('node-mcu event data');
-        //console.log(data);
+        console.log(data);
         var availableSlots = [];
         var numOfSlots = [];
         var names = [];
-        for(id in data){
-            names.push(data[id].name);
-            numOfSlots.push(data[id].numOfSlots);
-            availableSlots.push(data[id].availableSlots);
-        }
-        generateGraph(names, numOfSlots, availableSlots);
+        // for(id in data){
+        //     names.push(data[id].name);
+        //     numOfSlots.push(data[id].numOfSlots);
+        //     availableSlots.push(data[id].availableSlots);
+        // }
+        //generateGraph(names, numOfSlots, availableSlots);
 
     });
 
